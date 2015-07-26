@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="assets/jsxgraph/css/jsxgraph.css">
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
+    <link href="assets/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="src/css/interactive133.css">
+</head>
+<body>
+
+<div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
+	<div class="spaced-v bordered">
+        <div class="row">
+            <div class="col-sm-12">
+				<p><strong>Problem:</strong> Imagine you have the following table to paint with some colors. Can you accomplish this task with a minimum of these colors? How many colors?</p>
+			</div>
+		</div>
+		<div class="row">
+            <div class="col-sm-12">
+				<p><strong>Usage:</strong> You can choose a color in the select box below. You can click over the spots' table to color them with the picked color. If you want to clear a color already painted, you need to ensure that color is selected in select box and just click over the spot where it was painted.</p>
+			</div>
+		</div>
+	</div>
+
+    <div class="spaced-v">
+        <button type="button" class="btn btn-primary" onClick="generateNewGame('questionJXGBox')">
+            New game
+        </button>
+    </div>
+
+    <div class="spaced-v bordered">
+        <div class="row">
+            <div class="col-sm-3" style="position: relative;">
+                <div style="position: relative; height: 63px;">
+                    <div id="specialSelect" style="position: absolute; z-index: 10;">
+                        Pick a color:
+                        <ul>
+                            <li value="blue">Blue</li>
+                            <li value="olive">Olive</li>
+                            <li value="yellow">Yellow</li>
+                            <li value="grey">Grey</li>
+                            <li value="plum">Plum</li>
+                            <li value="green">Green</li>
+                            <li value="orange">Orange</li>
+                            <li value="brown">Brown</li>
+                            <li value="fuchsia">Fuchsia</li>
+                            <li value="black">Black</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div id="questionJXGBox" class="jxgbox center-img" oncontextmenu="return false;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="messageContainer" class="spaced-v bordered" style="display: none;">
+        <div><b><span id="message"></span></b></div>
+    </div>
+
+    <div class="spaced-v">
+        <button id="showAnswer" type="button" class="btn btn-success spaced-h"
+                onClick="showAnswer();">Explain it
+        </button>
+    </div>
+
+    <div>
+        <div id="answerExplanation" class="bordered answer-bg hidden height-auto">
+        </div>
+    </div>
+
+</div>
+<script src="assets/jquery/jquery-1.10.2.min.js"></script>
+<script src="assets/jsxgraph/js/jsxgraphcore.js"></script>
+<script type="text/javascript" src="src/js/interactive133.js"></script>
+<script type="text/javascript" src="src/js/math_utils.js"></script>
+<script type="text/javascript" src="src/js/design_form_utils.js"></script>
+<script type="text/javascript" src="src/js/log_utils.js"></script>
+<script type="text/javascript" src="src/js/list_utils.js"></script>
+<script type="text/javascript" src="src/js/message_utils.js"></script>
+<script type="text/javascript" src="src/js/mouse_utils.js"></script>
+<script type="text/javascript" src="src/js/array_utils.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        generateNewGame("questionJXGBox");
+
+        $(".dropdown-menu li a").click(function () {
+            var selText = $(this).text();
+            $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+        });
+
+        $("#specialSelect ul li").click(function () {
+            $("#specialSelect").css("border-color", $(this).attr('value'));
+            $("#specialSelect ul").css("display", 'none');
+            selectedColor = $(this).attr('value');
+        });
+
+        $("#specialSelect").mouseover(function () {
+            $("#specialSelect ul").css("display", 'block');
+        });
+
+        $("#specialSelect").mouseout(function () {
+            $("#specialSelect ul").css("display", 'none');
+        });
+
+    });
+</script>
+</body>
+</html>
